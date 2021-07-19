@@ -25,7 +25,7 @@ SECRET_KEY = 'r=hr+j@cwa-u5nuv1+2mvx(jl0l+=h8r%%hrr%q27b3eiua9xa'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.yoursocialtools.com', 'yoursocialtools.com']
+ALLOWED_HOSTS = ['www.yoursocialtools.com']
 
 
 # Application definition
