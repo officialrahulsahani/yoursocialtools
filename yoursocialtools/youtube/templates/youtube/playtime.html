@@ -1,0 +1,61 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% load static %}
+        <div style="background-color:black;color:white; text-align:center;padding:1px;">
+            <p><h2> Youtube Playtime </h2></p>
+        </div>
+
+
+        <div class="alert alert-warning" role="alert" align="center">
+            Enter Url of any Youtube Playlist
+            </div>
+        
+
+
+
+     {% if messages %}
+            <div class="alert alert-danger" role="alert" align="center">
+            {% for m in messages %}
+                {{ m }}
+            {% endfor %}
+            </div>
+    {% endif %}
+    </br>
+    
+    <div class="container" align="center">
+            <form method = "POST" action="/youtube/result/">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="col-lg-5">
+                    <input type="text" name="srh" class="form-control" placeholder="Enter Url :">
+                </div></br>
+                <label class="col-lg-2">
+                    <button type="submit" class="btn btn-danger">Search</button>
+                </label>
+            </div>
+        </form>
+
+        {% if playlist_link %}
+            
+            <div class="alert alert-success" role="alert" align="center">
+            <b> Total Time :  {{playlist_link.hours}}H : {{playlist_link.minutes}}M : {{playlist_link.seconds}}S</b>
+            </div>
+            
+        {% endif %}
+
+
+        <div class="alert alert-info" role="alert">
+            Note : This Tool gives results from publicly available videos.
+            Private Videos will not be counted in total playtime of videos.
+            </div>
+       </div>
+        
+        
+
+
+       
+       
+    
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% load static %}
+        <div style="background-color:black;color:white; text-align:center;padding:1px;">
+            <p><h2> Total Time </h2></p>
+        </div>
+
+        {% if playlist_link %}
+            {{playlist_link.hours}}
+            {{playlist_link.minutes}}
+            {{playlist_link.seconds}}
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+            This is a danger alert—check it out!
+            </div>
+        {% endif %}
+        
+        
+
+           
+{% endblock %}
+
+
+

@@ -1,0 +1,32 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% load static %}
+
+
+        <div style="background-color:black;color:white; text-align:center;padding:1px;">
+            <p><h2> Report a Bug </h2></p>
+        </div> 
+        
+        {% if messages %}
+            <div class="alert alert-success" role="alert" align="center">
+            {% for m in messages %}
+                {{ m }}
+            {% endfor %}
+            </div>
+        {% endif %}
+
+       <div class="container">
+            <form method="POST" >
+                {% csrf_token %}
+                  <div class="col-md-5">
+                      {{ form.as_p }}
+                  </div>
+                  &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <br>
+
+
+
+{% endblock %}
