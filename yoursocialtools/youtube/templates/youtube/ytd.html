@@ -1,0 +1,123 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% load static %}
+
+        
+        
+
+
+
+
+
+
+{% if messages %}
+    <div class="alert alert-danger" role="alert" align="center">
+    {% for m in messages %}
+        {{ m }}
+    {% endfor %}
+    </div>
+{% endif %}
+
+<!-- container start here -->
+<div class="container">
+
+    <br><br>
+    <center><h3> Enter Youtube Video Link Here </h3></center>
+    <!-- form start here -->
+    <form method="post">
+        {% csrf_token %}
+        <br>
+        <div class="form-group">
+            <input name="ylink" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter Your Selected Youtube Video Link.">
+            <small id="emailHelp" class="form-text text-muted"></small>
+        </div>
+        <br>
+        <center>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </center>
+    </form>
+    <!-- form end here -->
+
+    {% if yobj %}
+
+        <strong><h3 style="text-align: center; margin-bottom: 30px; margin-top: 50px;">
+            {{ yobj.title }}
+        </h3>
+        </strong>
+
+        <div class="col"
+             style="color: white; text-align: center; margin-top: 30px; color: black; margin-top: 20px; margin-bottom: 20px;">
+            <i class="fa fa-eye" style="margin-right: 10px; font-size: 20px; color: black;"></i>{{ yobj.viewcount }}
+            <i class="fa fa-star-o"
+               style="margin-right: 10px; margin-left: 30px; font-size: 20px; color: black;"></i>{{ yobj.rating|floatformat }}
+        </div>
+
+        <div class="embed-responsive embed-responsive-21by9">
+            <iframe class="embed-responsive-item" src="{{ embedlink }}"></iframe>
+        </div>
+
+        <table class="table" style="margin-top: 30px; margin-bottom: 50px; color: black;">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">quality</th>
+                <th scope="col">File Size</th>
+                <th scope="col">Download</th>
+            </tr>
+            </thead>
+            {% for i in yobj.streams %}
+                <tbody style=" color: black;">
+                <tr>
+                    <th scope="row">{{ i.quality }}</th>
+                    <td>{{ i.get_filesize|filesizeformat }}</td>
+                    <td><a href="{{ i.url }}" target="new"><strong
+                            style="color: lime;">Download</strong></a></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+        <table class="table" style="margin-top: 30px; margin-bottom: 50px; color: black;">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">quality</th>
+                <th scope="col">File Size</th>
+                <th scope="col">Download</th>
+            </tr>
+            </thead>
+            {% for i in yobj.audiostreams %}
+                <tbody style=" color: black;">
+                <tr>
+                    <th scope="row">{{ i.quality }}</th>
+                    <td>{{ i.get_filesize|filesizeformat }}</td>
+                    <td><a href="{{ i.url }}" target="new"><strong
+                            style="color: lime;">Download</strong></a></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+        <div class="col"
+             style="color: white; text-align: center; margin-top: 30px; color: black; margin-top: 20px; margin-bottom: 20px;">
+            <strong>Username </strong>
+            <p>{{ yobj.username }}</p>
+            <strong>Video ID </strong>
+            <p>{{ yobj.videoid }}</p>
+            <strong>Watch URL </strong>
+            <p><a href="{{ yobj.watchv_url }}">{{ yobj.watchv_url }}</a></p>
+            <strong>Auther </strong>
+            <p>{{ yobj.author }}</p>
+        </div>
+        <center>
+            <img src="{{ yobj.bigthumb }}" style="width: 50%; height: auto">
+        </center>
+
+
+    {% endif %}
+
+
+</div><br>
+
+<!-- container end here -->
+{% endblock %}
