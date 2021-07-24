@@ -1,14 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from googleapiclient.discovery import build
 import re
 from datetime import timedelta
+# from pytube import YouTube
+import os
+from django.http import FileResponse
+import pafy
 
 def playtime(request):
     return render(request, 'youtube/playtime.html')
 
+def ytb_down(request):
+    try:
+        if request.method == 'POST':
+            url = request.POST.get('ylink')
+            video = pafy.new(url)
+            embedlink = url.replace("watch?v=", "embed/")
+            context = {
+                'yobj': video,
+                'embedlink': embedlink,
+            }
+            return render(request, 'youtube/ytd.html', context)
+        return render(request, 'youtube/ytd.html')
+    except:
+        messages.error(request, "This Link is not Valid!")
+        return render(request, 'youtube/ytd.html')
+        
+
 def result(request, playlist_link):
-    playlist_link = request.POST['srh']
+    # playlist_link = request.POST['srh']
+    playlist_link = request.POST.get('srh')
+
     index = playlist_link.rfind('=')
     if index == -1:
         playlist_link = None
