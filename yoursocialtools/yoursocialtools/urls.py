@@ -7,5 +7,7 @@ urlpatterns = [
     path('', views.home),
     path('', include('common.urls')),
     path('youtube/', include('youtube.urls')),
+    path('facebook/', include('facebook.urls')),
+
 
 ]

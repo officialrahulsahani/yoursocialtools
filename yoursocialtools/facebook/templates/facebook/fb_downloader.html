@@ -1,0 +1,42 @@
+<title>Facebook Videos Downloader</title>
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% load static %}
+
+
+{% if messages %}
+    <div class="alert alert-danger" role="alert" align="center">
+    {% for m in messages %}
+        {{ m }}
+    {% endfor %}
+    </div>
+{% endif %}
+
+<!-- container start here -->
+<div class="container">
+
+    <br><br>
+    <center><h3> Enter Facebook Video Link Here </h3></center>
+    <!-- form start here -->
+    <form action ="{%  url 'fb_downloader' %}" method="post">
+        {% csrf_token %}
+        <br>
+        <div class="form-group">
+            <input name="url" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter Your Copied Facebook Video Link.">
+            <small id="emailHelp" class="form-text text-muted"></small>
+        </div>
+        <br>
+        <center>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </center>
+    </form>
+    <!-- form end here -->
+
+    
+
+
+</div><br>
+
+{% endblock %}
